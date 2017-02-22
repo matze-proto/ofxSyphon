@@ -63,6 +63,13 @@ string ofxSyphonServer::getName()
 	return name;
 }
 
+void ofxSyphonServer::stop()
+{
+    [(SyphonServer *)mSyphon stop];
+    [(SyphonServer *)mSyphon release];
+    mSyphon = nil;
+}
+
 void ofxSyphonServer::publishScreen()
 {
 	int w = ofGetWidth();

@@ -14,6 +14,7 @@ class ofxSyphonServer {
 	ofxSyphonServer();
 	~ofxSyphonServer();
 	void setName (string n);
+    void stop();
 	string getName();
 	void publishScreen();
     void publishTexture(ofTexture* inputTexture);

@@ -1,6 +1,12 @@
 Syphon for Open Frameworks
 ==========================
 
+Matze additions
+----------------
+
+Used the core branch of syphon framework
+
+
 About
 -----
 
