@@ -85,6 +85,41 @@ void ofxSyphonServer::publishScreen()
 	tex.clear();
 }
 
+void ofxSyphonServer::publishFBO(ofFbo* inputFbo){
+    // If we are setup, and our input texture
+    if(inputFbo->isAllocated())
+    {
+        NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+        
+        if (!mSyphon)
+        {
+            mSyphon = [[SyphonServer alloc] initWithName:@"Untitled" context:CGLGetCurrentContext() options:nil];
+        }
+        SyphonServer *ss = static_cast<SyphonServer*>(mSyphon);
+        CGLLockContext(ss.context);
+        CGLSetCurrentContext(ss.context);
+        NSSize size;
+        size.width = inputFbo->getWidth();
+        size.height = inputFbo->getHeight();
+        [ss bindToDrawFrameOfSize:size];
+        GLint syFBO;
+        glGetIntegerv(GL_FRAMEBUFFER_BINDING, &syFBO);
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, inputFbo->getFbo());
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, syFBO);
+        
+        glBlitFramebuffer(0, 0, size.width, size.height,
+                          0, 0, size.width, size.height,
+                          GL_COLOR_BUFFER_BIT, GL_LINEAR);
+        [ss unbindAndPublish];
+        CGLUnlockContext(ss.context);
+        
+        [pool drain];
+    }
+    else
+    {
+        cout<<"ofxSyphonServer FBO is not properly backed.  Cannot draw.\n";
+    }
+}
 
 void ofxSyphonServer::publishTexture(ofTexture* inputTexture)
 {

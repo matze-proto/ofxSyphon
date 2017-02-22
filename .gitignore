@@ -17,6 +17,8 @@ ipch/
 *.perspectivev3
 xcuserdata
 *.mode1*v3
+*.pbxproj
+*.xcworkspacedata
 
 # codeblocks project files
 *.depend
@@ -26,3 +28,4 @@ xcuserdata
 *.vcxproj.user
 *.suo
 *.sdf
+
