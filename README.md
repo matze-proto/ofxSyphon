@@ -4,7 +4,7 @@ Syphon for Open Frameworks
 Matze additions
 ----------------
 
-Used the core branch of syphon framework
+Used the core-profile branch of syphon framework for using openGL 3/4 context in openFrameworks. I have no experience with Objective-C, but at least made it to run. Works for me, but surely not intended for productive use. Fast vergessen, added a stop function to ofxSyphonServer.
 
 
 About
